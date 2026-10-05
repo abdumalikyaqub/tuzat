@@ -25,7 +25,10 @@ internal sealed class LayoutSwitcher
         nint? b = FindInstalled(klidB);
         if (a is null || b is null)
         {
-            error = $"раскладка {(a is null ? klidA : klidB)} не установлена в Windows, горячие клавиши отключены";
+            string missing = a is null ? klidA : klidB;
+            error = Localized.Text(
+                $"layout {missing} is not installed in Windows, hotkeys are off",
+                $"раскладка {missing} не установлена в Windows, горячие клавиши отключены");
             return null;
         }
 

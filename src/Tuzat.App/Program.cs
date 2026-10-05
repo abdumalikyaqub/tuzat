@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using Tuzat.Core;
 
 namespace Tuzat.App;
 
@@ -22,7 +23,9 @@ internal static class Program
         catch (Win32Exception e)
         {
             MessageBox.Show(
-                $"Не удалось установить перехват клавиатуры: {e.Message} (код {e.NativeErrorCode}).",
+                Localized.Text(
+                    $"Cannot install the keyboard hook: {e.Message} (code {e.NativeErrorCode}).",
+                    $"Не удалось установить перехват клавиатуры: {e.Message} (код {e.NativeErrorCode})."),
                 "Tuzat",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Error);

@@ -20,7 +20,7 @@ public static class HotkeyParser
         hotkey = default;
         if (string.IsNullOrWhiteSpace(text))
         {
-            error = "пустое значение";
+            error = Localized.Text("empty value", "пустое значение");
             return false;
         }
 
@@ -33,7 +33,7 @@ public static class HotkeyParser
             {
                 if (modifiers.HasFlag(modifier))
                 {
-                    error = $"модификатор {part} указан дважды";
+                    error = Localized.Text($"modifier {part} is used twice", $"модификатор {part} указан дважды");
                     return false;
                 }
                 modifiers |= modifier;
@@ -42,35 +42,37 @@ public static class HotkeyParser
             {
                 if (key is not null)
                 {
-                    error = "указано больше одной основной клавиши";
+                    error = Localized.Text("more than one main key", "указано больше одной основной клавиши");
                     return false;
                 }
                 key = code;
             }
             else
             {
-                error = $"неизвестная клавиша \"{part}\"";
+                error = Localized.Text($"unknown key \"{part}\"", $"неизвестная клавиша \"{part}\"");
                 return false;
             }
         }
 
         if (key is not { } finalKey)
         {
-            error = "нет основной клавиши";
+            error = Localized.Text("no main key", "нет основной клавиши");
             return false;
         }
 
         // Windows reports Ctrl+Pause as VK_CANCEL, so this hotkey would never fire.
         if (finalKey == VirtualKey.Pause && modifiers.HasFlag(HotkeyModifiers.Ctrl))
         {
-            error = "Ctrl+Pause не поддерживается";
+            error = Localized.Text("Ctrl+Pause is not supported", "Ctrl+Pause не поддерживается");
             return false;
         }
 
         if (KeyClassifier.Classify(finalKey) is KeyKind.Printable or KeyKind.Space
             && (modifiers & (HotkeyModifiers.Ctrl | HotkeyModifiers.Alt | HotkeyModifiers.Win)) == 0)
         {
-            error = "клавиша без Ctrl, Alt или Win мешает набору текста";
+            error = Localized.Text(
+                "a letter, digit or Space without Ctrl, Alt or Win blocks normal typing",
+                "клавиша без Ctrl, Alt или Win мешает набору текста");
             return false;
         }
 

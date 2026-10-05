@@ -1,6 +1,10 @@
 <Project>
   <PropertyGroup>
-    <Version>1.0.0</Version>
+    <Version>0.9.0</Version>
+    <Product>Tuzat</Product>
+    <Description>Fixes text typed in the wrong keyboard layout with one hotkey.</Description>
+    <Copyright>Copyright (c) 2026 abdumalikyaqub</Copyright>
+    <RepositoryUrl>https://github.com/abdumalikyaqub/tuzat</RepositoryUrl>
     <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>

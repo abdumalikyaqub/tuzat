@@ -1,3 +1,5 @@
+using Tuzat.Core;
+
 namespace Tuzat.App;
 
 internal static class CrashLog
@@ -28,7 +30,9 @@ internal static class CrashLog
         }
 
         MessageBox.Show(
-            $"Tuzat остановлен из-за ошибки.{Environment.NewLine}Подробности: {LogPath}",
+            Localized.Text(
+                $"Tuzat stopped because of an error.{Environment.NewLine}Details: {LogPath}",
+                $"Tuzat остановлен из-за ошибки.{Environment.NewLine}Подробности: {LogPath}"),
             "Tuzat",
             MessageBoxButtons.OK,
             MessageBoxIcon.Error);

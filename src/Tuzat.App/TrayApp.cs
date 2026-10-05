@@ -27,18 +27,21 @@ internal sealed class TrayApp : ApplicationContext
         _hooks = new InputHooks((action, strokes) => _ui.Post(_ => Run(action, strokes), null));
         _hooks.Start();
 
-        _pauseItem = new ToolStripMenuItem("Пауза", null, (_, _) => SetPaused(!_hooks.Paused));
-        _autostartItem = new ToolStripMenuItem("Автозапуск", null, (_, _) => ToggleAutostart()) { Checked = Autostart.IsEnabled };
+        _pauseItem = new ToolStripMenuItem(Localized.Text("Pause", "Пауза"), null, (_, _) => SetPaused(!_hooks.Paused));
+        _autostartItem = new ToolStripMenuItem(Localized.Text("Start with Windows", "Автозапуск"), null, (_, _) => ToggleAutostart())
+        {
+            Checked = Autostart.IsEnabled,
+        };
         var menu = new ContextMenuStrip();
         menu.Items.AddRange(new ToolStripItem[]
         {
             _pauseItem,
             _autostartItem,
             new ToolStripSeparator(),
-            new ToolStripMenuItem("Открыть настройки", null, (_, _) => OpenSettings()),
-            new ToolStripMenuItem("Перечитать настройки", null, (_, _) => ApplySettings()),
+            new ToolStripMenuItem(Localized.Text("Open settings", "Открыть настройки"), null, (_, _) => OpenSettings()),
+            new ToolStripMenuItem(Localized.Text("Reload settings", "Перечитать настройки"), null, (_, _) => ApplySettings()),
             new ToolStripSeparator(),
-            new ToolStripMenuItem("Выход", null, (_, _) => ExitThread()),
+            new ToolStripMenuItem(Localized.Text("Exit", "Выход"), null, (_, _) => ExitThread()),
         });
         _tray = new NotifyIcon { Icon = _activeIcon, Text = "Tuzat", ContextMenuStrip = menu, Visible = true };
 
@@ -74,7 +77,11 @@ internal sealed class TrayApp : ApplicationContext
         _hooks.SetBindings(_layouts is null ? null : _settings.Bindings);
         if (errors.Count > 0)
         {
-            _tray.ShowBalloonTip(10_000, "Tuzat: настройки", string.Join(Environment.NewLine, errors), ToolTipIcon.Warning);
+            _tray.ShowBalloonTip(
+                10_000,
+                Localized.Text("Tuzat: settings", "Tuzat: настройки"),
+                string.Join(Environment.NewLine, errors),
+                ToolTipIcon.Warning);
         }
     }
 
@@ -83,7 +90,7 @@ internal sealed class TrayApp : ApplicationContext
         _hooks.Paused = paused;
         _pauseItem.Checked = paused;
         _tray.Icon = paused ? _pausedIcon : _activeIcon;
-        _tray.Text = paused ? "Tuzat — пауза" : "Tuzat";
+        _tray.Text = paused ? Localized.Text("Tuzat (paused)", "Tuzat (пауза)") : "Tuzat";
     }
 
     private void ToggleAutostart()
@@ -95,7 +102,11 @@ internal sealed class TrayApp : ApplicationContext
         }
         catch (Exception e) when (e is UnauthorizedAccessException or System.Security.SecurityException or IOException)
         {
-            _tray.ShowBalloonTip(5_000, "Tuzat", $"Не удалось изменить автозапуск: {e.Message}", ToolTipIcon.Error);
+            _tray.ShowBalloonTip(
+                5_000,
+                "Tuzat",
+                Localized.Text($"Cannot change autostart: {e.Message}", $"Не удалось изменить автозапуск: {e.Message}"),
+                ToolTipIcon.Error);
         }
     }
 

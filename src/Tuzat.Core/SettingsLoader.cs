@@ -35,7 +35,9 @@ public static class SettingsLoader
         }
         catch (Exception e) when (e is IOException or UnauthorizedAccessException)
         {
-            return new SettingsLoadResult(TuzatSettings.Default, [$"не удалось прочитать {path}: {e.Message}"]);
+            return new SettingsLoadResult(
+                TuzatSettings.Default,
+                [Localized.Text($"cannot read {path}: {e.Message}", $"не удалось прочитать {path}: {e.Message}")]);
         }
     }
 
@@ -50,7 +52,9 @@ public static class SettingsLoader
         {
             return new SettingsLoadResult(
                 TuzatSettings.Default,
-                [$"неверный JSON (строка {e.LineNumber + 1}), используются значения по умолчанию"]);
+                [Localized.Text(
+                    $"invalid JSON (line {e.LineNumber + 1}), default values are used",
+                    $"неверный JSON (строка {e.LineNumber + 1}), используются значения по умолчанию")]);
         }
 
         file ??= new SettingsFile();
@@ -61,7 +65,9 @@ public static class SettingsLoader
         var fixSelection = ReadHotkey(file.FixSelection, "fixSelection", defaults.FixSelection, errors);
         if (fixLastWord == fixSelection)
         {
-            errors.Add("fixLastWord и fixSelection совпадают, используются значения по умолчанию");
+            errors.Add(Localized.Text(
+                "fixLastWord and fixSelection are the same, default values are used",
+                "fixLastWord и fixSelection совпадают, используются значения по умолчанию"));
             fixLastWord = defaults.FixLastWord;
             fixSelection = defaults.FixSelection;
         }
@@ -89,7 +95,9 @@ public static class SettingsLoader
             return (a.ToUpperInvariant(), b.ToUpperInvariant());
         }
 
-        errors.Add("layouts: нужны две разные раскладки в формате KLID, например \"00000409\"");
+        errors.Add(Localized.Text(
+            "layouts: two different layout IDs (KLID) are required, for example \"00000409\"",
+            "layouts: нужны две разные раскладки в формате KLID, например \"00000409\""));
         return (defaults.LayoutA, defaults.LayoutB);
     }
 
@@ -100,7 +108,10 @@ public static class SettingsLoader
         if (value is null) return fallback;
         if (value is >= TuzatSettings.MinRestoreDelayMs and <= TuzatSettings.MaxRestoreDelayMs) return value.Value;
 
-        errors.Add($"clipboardRestoreDelayMs: нужно число от {TuzatSettings.MinRestoreDelayMs} до {TuzatSettings.MaxRestoreDelayMs}");
+        const int min = TuzatSettings.MinRestoreDelayMs, max = TuzatSettings.MaxRestoreDelayMs;
+        errors.Add(Localized.Text(
+            $"clipboardRestoreDelayMs: a number from {min} to {max} is required",
+            $"clipboardRestoreDelayMs: нужно число от {min} до {max}"));
         return fallback;
     }
 
