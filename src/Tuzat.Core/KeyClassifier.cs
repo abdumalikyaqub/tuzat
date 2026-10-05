@@ -18,4 +18,8 @@ public static class KeyClassifier
             or >= 0xAD and <= 0xB7 or 0xFF => KeyKind.Ignore,
         _ => KeyKind.Reset,
     };
+
+    // Without the extended flag, an injected right Ctrl or Alt release is applied to the left key.
+    public static bool IsExtendedKey(int virtualKey) =>
+        virtualKey is VirtualKey.RControl or VirtualKey.RMenu or VirtualKey.LWin or VirtualKey.RWin;
 }

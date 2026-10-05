@@ -76,7 +76,7 @@ internal sealed class InputSender
         _batch.Add(Keyboard(
             (ushort)virtualKey,
             (ushort)MapVirtualKey((uint)virtualKey, MAPVK_VK_TO_VSC),
-            up ? KEYEVENTF_KEYUP : 0));
+            (up ? KEYEVENTF_KEYUP : 0) | (KeyClassifier.IsExtendedKey(virtualKey) ? KEYEVENTF_EXTENDEDKEY : 0)));
 
     private void AddScan(ushort scanCode, bool extended, bool up) =>
         _batch.Add(Keyboard(

@@ -139,7 +139,7 @@ internal sealed class InputHooks : IDisposable
         switch (_filter.OnKeyDown(virtualKey, modifiers, out var action))
         {
             case KeyDecision.Trigger:
-                _onHotkey(action, _buffer.Snapshot());
+                _onHotkey(action, _buffer.Snapshot(GetForegroundWindow()));
                 return true;
             case KeyDecision.Swallow:
                 return true;

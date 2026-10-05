@@ -80,6 +80,19 @@ public class WordBufferTests
     }
 
     [Fact]
+    public void Snapshot_for_another_window_is_empty_and_clears_the_buffer()
+    {
+        var buffer = Type('G', 'H');
+
+        Assert.Empty(buffer.Snapshot(window: 2));
+        Assert.Empty(buffer.Snapshot(Window));
+    }
+
+    [Fact]
+    public void Snapshot_for_same_window_returns_strokes() =>
+        Assert.Equal(2, Type('G', 'H').Snapshot(Window).Length);
+
+    [Fact]
     public void Buffer_holds_max_length() =>
         Assert.Equal(WordBuffer.MaxLength, Type(Enumerable.Repeat((int)'G', WordBuffer.MaxLength).ToArray()).Snapshot().Length);
 

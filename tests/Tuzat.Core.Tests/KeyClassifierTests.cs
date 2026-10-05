@@ -49,6 +49,22 @@ public class KeyClassifierTests
     public void Modifier_keys(int key) => Assert.Equal(KeyKind.Modifier, KeyClassifier.Classify(key));
 
     [Theory]
+    [InlineData(VirtualKey.RControl)]
+    [InlineData(VirtualKey.RMenu)]
+    [InlineData(VirtualKey.LWin)]
+    [InlineData(VirtualKey.RWin)]
+    public void Right_side_modifiers_are_extended_keys(int key) => Assert.True(KeyClassifier.IsExtendedKey(key));
+
+    [Theory]
+    [InlineData(VirtualKey.LShift)]
+    [InlineData(VirtualKey.RShift)]
+    [InlineData(VirtualKey.LControl)]
+    [InlineData(VirtualKey.LMenu)]
+    [InlineData(VirtualKey.Back)]
+    [InlineData(0x43)] // C
+    public void Other_keys_are_not_extended(int key) => Assert.False(KeyClassifier.IsExtendedKey(key));
+
+    [Theory]
     [InlineData(VirtualKey.Pause)]
     [InlineData(VirtualKey.Snapshot)]
     [InlineData(VirtualKey.NumLock)]

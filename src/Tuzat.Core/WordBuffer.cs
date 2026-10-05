@@ -43,6 +43,18 @@ public sealed class WordBuffer
 
     public KeyStroke[] Snapshot() => _strokes.ToArray();
 
+    // The hotkey itself never reaches OnKeyDown, so the window check must also run here.
+    public KeyStroke[] Snapshot(nint window)
+    {
+        if (window != _window)
+        {
+            _strokes.Clear();
+            _window = window;
+        }
+
+        return Snapshot();
+    }
+
     public void Clear() => _strokes.Clear();
 
     // A run longer than MaxLength is not a word, so a partial replay would be wrong.
