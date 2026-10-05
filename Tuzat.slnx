@@ -1,5 +1,6 @@
 <Solution>
   <Folder Name="/src/">
+    <Project Path="src/Tuzat.App/Tuzat.App.csproj" />
     <Project Path="src/Tuzat.Core/Tuzat.Core.csproj" />
   </Folder>
   <Folder Name="/tests/">
