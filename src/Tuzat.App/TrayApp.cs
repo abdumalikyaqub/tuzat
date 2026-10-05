@@ -13,6 +13,7 @@ internal sealed class TrayApp : ApplicationContext
     private readonly Icon _activeIcon = TrayIcons.Create(paused: false);
     private readonly Icon _pausedIcon = TrayIcons.Create(paused: true);
     private readonly InputSender _input = new();
+    private readonly ClipboardGuard _clipboard = new();
     private readonly InputHooks _hooks;
     private readonly NotifyIcon _tray;
     private readonly ToolStripMenuItem _pauseItem;
@@ -55,6 +56,9 @@ internal sealed class TrayApp : ApplicationContext
         {
             case HotkeyAction.FixLastWord:
                 FixLastWordAction.Run(strokes, _layouts, _input);
+                break;
+            case HotkeyAction.FixSelection:
+                FixSelectionAction.Run(_layouts, _input, _clipboard, _settings.ClipboardRestoreDelayMs);
                 break;
         }
     }
@@ -119,6 +123,7 @@ internal sealed class TrayApp : ApplicationContext
             SystemEvents.PowerModeChanged -= OnPowerModeChanged;
             SystemEvents.SessionSwitch -= OnSessionSwitch;
             _hooks.Dispose();
+            _clipboard.Dispose();
             _tray.Visible = false;
             _tray.ContextMenuStrip?.Dispose();
             _tray.Dispose();

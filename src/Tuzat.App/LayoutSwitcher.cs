@@ -10,7 +10,14 @@ internal sealed class LayoutSwitcher
     private readonly nint _a;
     private readonly nint _b;
 
-    private LayoutSwitcher(nint a, nint b) { _a = a; _b = b; }
+    private LayoutSwitcher(nint a, nint b)
+    {
+        _a = a;
+        _b = b;
+        Map = LayoutMapBuilder.Build(a, b);
+    }
+
+    public LayoutMap Map { get; }
 
     public static LayoutSwitcher? TryCreate(string klidA, string klidB, out string? error)
     {
