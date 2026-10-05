@@ -1,0 +1,77 @@
+name: Bug report
+description: Something does not work as expected.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for the report. Please do not paste passwords or private text: a made-up word like `ghbdtn` is enough.
+        Security problems go to a [private report](https://github.com/abdumalikyaqub/tuzat/security/advisories/new) instead.
+  - type: input
+    id: version
+    attributes:
+      label: Tuzat version
+      placeholder: "0.9.0"
+    validations:
+      required: true
+  - type: input
+    id: windows
+    attributes:
+      label: Windows version
+      placeholder: "Windows 11 24H2"
+    validations:
+      required: true
+  - type: input
+    id: layouts
+    attributes:
+      label: Keyboard layouts
+      placeholder: "English (US) and Russian"
+    validations:
+      required: true
+  - type: input
+    id: app
+    attributes:
+      label: App where it happened
+      placeholder: "Chrome, Word, Windows Terminal, ..."
+    validations:
+      required: true
+  - type: dropdown
+    id: hotkey
+    attributes:
+      label: Which action?
+      options:
+        - Fix last word (Pause)
+        - Fix selection (Shift+Pause)
+        - Tray menu or settings
+        - Installer
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Switch to English layout
+        2. Type ghbdtn
+        3. Press Pause
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: What happened
+    validations:
+      required: true
+  - type: textarea
+    id: crash
+    attributes:
+      label: crash.log (if Tuzat stopped)
+      description: Contents of `%LocalAppData%\Tuzat\crash.log`. It holds only exception types and stack traces.
+      render: text

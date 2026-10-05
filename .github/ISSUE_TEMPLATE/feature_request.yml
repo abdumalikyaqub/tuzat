@@ -1,0 +1,25 @@
+name: Feature request
+description: Suggest an idea for Tuzat.
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: Tuzat stays small on purpose. Automatic correction and dictionaries are out of scope.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What is hard or impossible today?
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: Your idea
+      description: How should Tuzat help?
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives you considered

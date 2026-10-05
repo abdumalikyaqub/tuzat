@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="300" viewBox="0 0 960 300" role="img" aria-label="Tuzat: typed in the wrong layout? Press Pause. ghbdtn becomes привет.">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0F2A4A"/>
+      <stop offset="1" stop-color="#1E6FD9"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="300" rx="24" fill="url(#bg)"/>
+  <circle cx="130" cy="150" r="70" fill="#FFFFFF" fill-opacity="0.12"/>
+  <circle cx="130" cy="150" r="54" fill="#1E6FD9" stroke="#FFFFFF" stroke-width="4"/>
+  <text x="130" y="171" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="60" font-weight="700" fill="#FFFFFF">T</text>
+  <text x="240" y="128" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="64" font-weight="700" fill="#FFFFFF">Tuzat</text>
+  <text x="240" y="172" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="26" fill="#DCE8FA">Typed in the wrong layout? Press Pause.</text>
+  <g font-family="Consolas, Menlo, monospace" font-size="28">
+    <rect x="240" y="200" width="150" height="52" rx="10" fill="#FFFFFF" fill-opacity="0.14"/>
+    <text x="315" y="235" text-anchor="middle" fill="#FFFFFF">ghbdtn</text>
+    <text x="436" y="235" text-anchor="middle" fill="#DCE8FA">→</text>
+    <rect x="482" y="200" width="150" height="52" rx="10" fill="#FFFFFF"/>
+    <text x="557" y="235" text-anchor="middle" fill="#0F2A4A">привет</text>
+  </g>
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="18" fill="#DCE8FA">
+    <rect x="680" y="208" width="84" height="36" rx="8" fill="none" stroke="#DCE8FA" stroke-width="2"/>
+    <text x="722" y="232" text-anchor="middle">Pause</text>
+    <text x="780" y="232">last word</text>
+  </g>
+</svg>
